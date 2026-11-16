@@ -101,7 +101,8 @@ A small script (`cuecheck.py`, in `styles/<slug>/demo/tools/` of several demos) 
   - **Chinese**: `core/tts/tts_zh.py lines.json out/` uses [edge-tts](https://github.com/rany2/edge-tts) with Microsoft's neural voices (`zh-CN-XiaoxiaoNeural`, `zh-CN-YunxiNeural`…), with the same outputs as `tts.py`, a rate per line and the silence trimmed. **It needs a network connection.**
 - Spell numbers out in the TTS text and write them as digits in the subtitles.
 - **Check every line**: `core/tts/asr_check.py` transcribes each WAV with faster-whisper and compares it with the script (`--lang zh`: numbers by value, so 十九 matches 19, and the rest character by character); re-generate until it exits 0. A misheard character in a short Chinese line is normal: listen, and if it is right, put what the model heard in the line's `asr` field. It also writes word timestamps for placing lines and subtitles.
-- **Before mixing**: TTS has a high peak-to-average ratio. Compress the voice first, then balance by RMS: voice about 10 dB above the music.
+- **Before mixing**: TTS and phone recordings have a high peak-to-average ratio. Compress the voice first, then balance by RMS: voice about 10 dB above the music (about 8 dB if the style's `STYLE.md` says so), with the music ducked while the voice speaks.
+- **Measure it, don't assume it.** The balance is only a guideline until the mix script enforces it. After mixing, print the RMS (dBFS) of voice, music, foley and ambience over the moments the voice is active, and make the script fail or warn when music is within 8 dB of the voice. A multiplier chosen by ear before the final loudness pass (for example a "music × 2" to make a score feel full) is the usual cause of music that drowns the voice, because loudnorm then raises the whole mix and hides the problem. Tonal foley (bells, chimes, dings) counts as music for this check: keep it about 12 dB under the voice.
 
 ## 5. Music
 
@@ -127,7 +128,7 @@ Write an original score from the cue map, in the instruments of the style's soun
 
 1. Contact sheets: a frame every 1–2 s with `still.mjs --range`, tiled with `core/render/sheet.py`. At least two full passes.
 2. Frame strips at 0.2 s for every key action: hand-overs, falls, hits.
-3. On the final file: `ffmpeg -af ebur128` (loudness), `blackdetect` (blank frames), whisper again on the final mix if it has voice.
+3. On the final file: `ffmpeg -af ebur128` (loudness), `blackdetect` (blank frames), whisper again on the final mix if it has voice, and the voice-versus-music level printout from §4 (music at least 10 dB under the voice while it speaks).
 4. Watch it once, at full speed, with sound.
 
 ## 9. 3D notes
