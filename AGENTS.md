@@ -70,7 +70,7 @@ All 99 styles · 全部风格:
 
 ## Workflow
 
-1. **Brief.** Make sure the style and the topic are clear. **Default: no script and no extra material from the user, so don't ask anything: write the script yourself and start making the film right away** (DIRECTOR.md §1). Ask (once, in a single message) only when the user asked to be asked, or when something blocks the film and only they can fix it (for a ✦ style, a failed image check). What you would otherwise ask:
+1. **Brief.** Make sure the style and the topic are clear. **Default: the user gives no script, so don't ask questions: write the narration script yourself and hand it to the user in the chat** (DIRECTOR.md §1), as a table of numbered lines with an estimated duration each, plus recording notes (one file per line or one file with clear pauses, the planned silences). **The user records the voice-over themselves; wait for their recordings, then build the film on them.** Their recording replaces TTS (use it as it is, transcribe it with faster-whisper for word timings, retime the film to it). Only if they say to use a synthetic voice, make the voice yourself and start right away. Ask (once, in a single message) only when the user asked to be asked, or when something blocks the film and only they can fix it (for a ✦ style, a failed image check). What you would otherwise ask:
    - anything about the topic you can't decide yourself (facts; names, logos or products that must appear);
    - whether they have material of their own: a voice recording or a preferred voice, music, photos, logos, fonts, and for a style built from real material, their own data or scans;
    - the film's language, if it isn't obvious (default: the language they write in or chose, for voice and subtitles);
@@ -80,7 +80,7 @@ All 99 styles · 全部风格:
 
    **A style marked ✦ draws with an image generator** (its `style.json` says `"needs": ["image-generation"]`). Run `python3 core/image/gen_image.py --check` from the library root before you write the questions, next to `setup.sh`. If it fails, put its reason and the question in the same message: what will they make the images with instead (another image API or app, or their own drawings; you give them the prompts and the file names)? With no image generator at all, tell them plainly that a film in this style can't start, and offer two or three other styles that fit their topic. Never draw the characters in code as a stand-in.
 
-   Fill every gap with a sensible default (their language, no own material, no storyboard review), sum up the brief in a few lines and start. Don't wait for a reply and don't come back with more questions.
+   Fill every other gap with a sensible default (their language, no own material, no storyboard review) and sum up the brief in a few lines. Don't come back with more questions. After the script is delivered, the only thing you wait for is the user's voice recording; meanwhile you may write the treatment and prove the look.
 2. **Treatment.** Write `TREATMENT.md` in the project folder (DIRECTOR.md §4), before you open the demo (an Edit & Documentary style gathers its material first: **Treatment first** above).
 3. **Look.** Render style frames or a model sheet with the real drawing code and check them against `STYLE.md` (DIRECTOR.md §5).
 4. **Storyboard, only if the user asked for it** (DIRECTOR.md §5). **Stop and wait for approval.** Otherwise don't stop.
