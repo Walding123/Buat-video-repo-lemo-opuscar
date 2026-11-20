@@ -8,7 +8,7 @@ You are the director, not a tech demo. A film is judged in this order: **sound, 
 
 ## 1. Take the brief
 
-The user gives a style and a topic, sometimes more (length, language, voice, must-have shots, brand rules). Everything else is your decision. Ask once, in a single message (AGENTS.md, Workflow), then no more questions. Defaults:
+The user gives a style and a topic, sometimes more (length, language, voice, must-have shots, brand rules). Everything else is your decision, and the script too when they give none: by default don't ask, start making the film (AGENTS.md, Workflow). Defaults:
 
 - Length **30–60 s**; shorter and tight beats padded. Beyond two or three minutes multiplies time and token cost: tell the user.
 - 1920×1080 at 24 fps by default; an output frame rate set in the style's `STYLE.md` (30 or 60 fps, for example) wins, and is what you pass to `--fps` and `mux.sh`; other sizes (vertical 1080×1920, for example) with `--size WxH` on the render tools.

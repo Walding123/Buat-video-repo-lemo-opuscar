@@ -44,7 +44,7 @@ If the user hasn't picked a style:
 - If they have their own styles, list those first, under "My styles" (in their language).
 - Show them the full list below in the chat, in the user's language only: English names (and English category names) for someone writing in English, Chinese names for someone writing in Chinese. Don't drop, merge or rename anything.
 - Link the gallery, where every style has its demo film: https://lemomo-ai.github.io/lemo-opuscar/
-- Then ask them to type the name. The list goes in your own message (a command's output isn't shown to them), and the question is plain text, not `AskUserQuestion`: its few options would hide the rest of the list.
+- Then ask them to type the name (the style is the only thing you ask for; nothing else about language, material or storyboard). The list goes in your own message (a command's output isn't shown to them), and the question is plain text, not `AskUserQuestion`: its few options would hide the rest of the list.
 
 <!-- style-list:start -->
 All 99 styles · 全部风格:
@@ -70,7 +70,7 @@ All 99 styles · 全部风格:
 
 ## Workflow
 
-1. **Brief.** Make sure the style and the topic are clear, then ask the user once, in a single message (DIRECTOR.md §1):
+1. **Brief.** Make sure the style and the topic are clear. **Default: no script and no extra material from the user, so don't ask anything: write the script yourself and start making the film right away** (DIRECTOR.md §1). Ask (once, in a single message) only when the user asked to be asked, or when something blocks the film and only they can fix it (for a ✦ style, a failed image check). What you would otherwise ask:
    - anything about the topic you can't decide yourself (facts; names, logos or products that must appear);
    - whether they have material of their own: a voice recording or a preferred voice, music, photos, logos, fonts, and for a style built from real material, their own data or scans;
    - the film's language, if it isn't obvious (default: the language they write in or chose, for voice and subtitles);
@@ -80,7 +80,7 @@ All 99 styles · 全部风格:
 
    **A style marked ✦ draws with an image generator** (its `style.json` says `"needs": ["image-generation"]`). Run `python3 core/image/gen_image.py --check` from the library root before you write the questions, next to `setup.sh`. If it fails, put its reason and the question in the same message: what will they make the images with instead (another image API or app, or their own drawings; you give them the prompts and the file names)? With no image generator at all, tell them plainly that a film in this style can't start, and offer two or three other styles that fit their topic. Never draw the characters in code as a stand-in.
 
-   Skip what their request already answers. Wait for the reply, fill every other gap with a sensible default, sum up the brief in a few lines and start. Don't come back with more questions.
+   Fill every gap with a sensible default (their language, no own material, no storyboard review), sum up the brief in a few lines and start. Don't wait for a reply and don't come back with more questions.
 2. **Treatment.** Write `TREATMENT.md` in the project folder (DIRECTOR.md §4), before you open the demo (an Edit & Documentary style gathers its material first: **Treatment first** above).
 3. **Look.** Render style frames or a model sheet with the real drawing code and check them against `STYLE.md` (DIRECTOR.md §5).
 4. **Storyboard, only if the user asked for it** (DIRECTOR.md §5). **Stop and wait for approval.** Otherwise don't stop.
